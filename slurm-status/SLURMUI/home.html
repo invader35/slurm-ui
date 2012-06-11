@@ -1,0 +1,311 @@
+<html>
+  <head>
+    <title>SLURM UI PROJECT</title>
+    <style></style>
+<link rel="stylesheet" href="./style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="./vtabs/vtabs.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../jquery/jquery-ui-1.8.20.custom/css/hot-sneaks/jquery-ui-1.8.20.custom.css" type="text/css" media="screen" />
+<script language="JavaScript" type="text/javascript" src="./Alea.js"></script>
+<script language="JavaScript" type="text/javascript" src="./Mash.js"></script>
+<script language="JavaScript" type="text/javascript" src="../jquery/jquery-ui-1.8.20.custom/js/jquery-1.7.2.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="../jquery/jquery-ui-1.8.20.custom/js/jquery-ui-1.8.20.custom.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="./mainScripts.js"></script>
+<script type="text/javascript" src="./amcharts/amcharts.js"></script>
+
+<script type="text/javascript">
+
+ $(document).ready(function() {
+   programclick();
+   updateNodeStatus();
+   updatePartitionStatus();
+   updateJobStatus();
+   updatePing();
+ //  writeLog();
+   updateCurrentStatistics();
+   getNodeGraph();
+   updateControllerStatus();
+
+   setInterval( "updatePing()", 5000 );
+   setInterval( "updateNodeStatus()", 10000 );
+   setInterval( "updatePartitionStatus()", 10000 );
+   setInterval( "updateJobStatus()", 5000 );
+   //setInterval( "writeLog()", 1200000);
+   setInterval( "updateCurrentStatistics()", 1201000);
+   setInterval( "getNodeGraph()", 1201000);
+   setInterval( "updateControllerStatus()", 5000 );
+   
+   $("#refreshButton").click(function() {	
+   updateNodeStatus();
+   updateJobStatus();
+   updatePartitionStatus();
+   updatePing();
+   updateCurrentStatistics();
+   getNodeGraph();
+   updateControllerStatus();
+   });	
+ 
+ 
+   $("#aboutButton").click(function() {
+	$("[name='contentDiv']").each(function() {
+		if ($(this).css('display') != 'none')
+		{
+			$(this).fadeOut("slow", function() {
+				$("#about").fadeIn("slow");		
+			});
+		}
+	});
+   });	
+   
+   $("#contactButton").click(function() {
+	$("[name='contentDiv']").each(function() {
+		if ($(this).css('display') != 'none')
+		{
+			$(this).fadeOut("slow", function() {
+				$("#contact").fadeIn("slow");		
+			});
+		}
+	});
+	
+   });
+
+   $("#programButton").click(function() {
+	$("[name='contentDiv']").each(function() {
+		if ($(this).css('display') != 'none')
+		{
+			$(this).fadeOut("slow", function() {
+				$("#pagecontent").fadeIn("slow");		
+			});
+		}
+	});
+	
+   });
+ });
+
+</script>
+
+<style type="text/css">
+
+body {
+	background-color: #CCC;
+}
+
+.header {
+	top: 0px;
+	width: 100%;
+	height: 50px;
+	background-image: url('../jquery/jquery-ui-1.8.20.custom/css/hot-sneaks/images/ui-bg_dots-small_35_35414f_2x2.png');
+	background-repeat: repeat;
+}
+
+.header .headerButton {
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 10px;
+
+	width: 90px;
+	height: 28px;
+	padding: 2px;
+        padding-top:8px;
+	
+	text-align: center;
+
+	font-family: Gill Sans,Arial,sans-serif; 
+	font-size: 100%;
+        font-weight:bold;
+	background-image: url('../jquery/jquery-ui-1.8.20.custom/css/hot-sneaks/images/ui-bg_diagonals-small_50_93c3cd_40x40.png');
+	background-repeat: repeat;
+
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+
+	cursor: pointer;
+}
+
+.header .headerButton:hover {
+	background-image: url('../jquery/jquery-ui-1.8.20.custom/css/hot-sneaks/images/ui-bg_diagonals-small_75_ccd232_40x40.png');
+}
+
+.descriptionheader {
+
+	font-family: Gill Sans,Arial,sans-serif; 
+	font-size: 120%;
+        font-weight:bold;
+	//color: #79BCFF;
+	color: #0099CC;
+}
+
+.description {
+
+	font-family: Gill Sans,Arial,sans-serif; 
+	font-size: 80%;
+        color:#333333; 
+      
+
+}
+
+ .refreshButton {
+        position: relative;
+        left: 10px; 
+        top: -33; 
+        padding-right: 10px;
+         float:right; margin-right:3px;	width: 100px;
+	height: 29px;
+	padding: 2px;
+        padding-top:4px;
+	text-align: center;
+	font-family: Gill Sans,Arial,sans-serif; 
+	font-size: 100%;
+        font-weight:bold;
+        vertical-align: middle;
+	padding-top:8px;
+        -moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+
+	background-image: url('../jquery/jquery-ui-1.8.20.custom/css/hot-sneaks/images/ui-bg_diagonals-small_50_93c3cd_40x40.png');
+	background-repeat: repeat;
+	cursor: pointer; 
+}
+.refreshButton:hover {
+	background-image: url('../jquery/jquery-ui-1.8.20.custom/css/hot-sneaks/images/ui-bg_diagonals-small_75_ccd232_40x40.png');
+}
+
+.pingArea {
+        background-image: url('../jquery/jquery-ui-1.8.20.custom/css/hot-sneaks/images/ui-bg_diagonals-small_40_db4865_40x40.png');
+	width: 970px;
+	margin: 0 auto;
+	margin-top: 20px;
+	padding: 10px;
+        -moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+
+}
+
+.content {
+	width: 1000px;
+	margin: 0 auto;
+	margin-top: 20px;
+z-index: 100;	
+}
+
+
+.content .contentArea {
+	background-color: white;
+	padding: 3px;
+
+	min-height: 300px;
+z-index: 100;
+
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+}
+
+.content .contentArea .subHeader {
+	width: 100%;
+	height: 50px;
+
+	background-image: url('../jquery/jquery-ui-1.8.20.custom/css/hot-sneaks/images/ui-bg_dots-small_35_35414f_2x2.png');
+	background-repeat: repeat;
+
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+
+	margin-bottom: 20px;
+z-index: 100;
+}
+
+.content .contentArea .subHeader h1 {
+	color: #79BCFF;
+	margin: 4px;
+z-index: 100;
+}
+
+.main 
+{
+margin-left:5%;
+margin-right:50%;
+z-index: 100;
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+
+<div class="header">
+	<div class="headerButton" style="float: right;" id="aboutButton" >
+		<span style="color:#333333"> ABOUT</span>	
+	</div>
+	<div class="headerButton" style="float: right;" id="contactButton">
+		<span style="color:#333333">CONTACT</span>
+	</div>
+	<div class="headerButton" style="float: right;" id="programButton">
+		<span style="color:#333333">PROGRAM</span>	
+	</div>
+</div>
+
+<div id="slurmpingArea" class="pingArea">
+	<div id="slurmping" style="width:800px;"></div>
+	<div class="refreshButton" id="refreshButton">
+		<span style="color:#333333;">REFRESH</span>
+	</div>
+</div>
+
+
+<div id="helper"></div>
+
+<div class="content">
+	<div name="contentDiv" id="pagecontent">
+	</div>
+	<div name="contentDiv" id="contact" style="display:none;" class="contentArea">
+		<div class="subheader">
+		<h1>Contact</h1>	
+		</div>
+  	<div style="margin-left:50px; margin-right:100px;">
+		<div></br><span class="descriptionheader">Eylul Tasyurek</span></br><p class="description">I was born in Turkey in 1990 and studied in Kayseri until university. In 2007, I have started to study in Computer Engineering Department of Bogazici University, in Istanbul and graduated at 2012, with the diploma project SLURM-UI. I like developing with C# and JavaScript. I also like to travel, cook sweets and take lots of photographs! You can contact me about anything at eylultasyurek@gmail.com!</p></div>
+</br>
+		<div></br><span class="descriptionheader">Cigdem Kocberber</span></br><p class="description">I was born in Ankara, the capital city of Turkey in which I have spent all of my childhood and education life until university. I have moved to Istanbul to continue my education in Bogazici University Computer Engineering Department. I am developing SLURM-UI as a senior project of Bachelors degree. I will be glad to help you about anything I could, in case you contact me at cigdem.kocberber@gmail.com. Please do not hesitate to ask anything at all.  </p></div>
+</br>
+		<div></br><span class="descriptionheader">Google Code Page</span></br><p class="description">You can download and review the codes and the documentation of SLURM-UI in <a href="code.google.com/p/slurm-ui/">SLURM-UI Code Page</a>. We would gladly appreciate your contributions and suggestions by using the 'Issues' tool of Google Code Page.</p></div>
+</br>
+		<div></br><span class="descriptionheader">Related Links:</span></br>
+		<p class="description">
+			- <a href="http://www.cmpe.boun.edu.tr/~ozturan/">Can Ozturan, Project Supervisor</a></br>
+			- <a href="http://serensoner.com">Seren Soner, Project Asistant</a></br>
+			- <a href="http://www.cmpe.boun.edu.tr">Bogazici University, Computer Engineering Department</a></br>	
+			- <a href="http://computing.llnl.gov/linux/slurm">SLURM Website</a></br>
+			- <a href="http://code.google.com/p/slurm-ui/">SLURM-UI, Google Code Page</a></br>
+			
+		</p></br></br>
+		</div>
+
+      </div>
+	</div>
+	<div name="contentDiv" id="about" style="display:none;" class="contentArea">
+		<div class="subheader">
+		<h1>About</h1>
+		</div></br>
+<div style="margin-left:50px; margin-right:100px;">
+	<p class="description"> <span class="descriptionheader">SLURM (Simple Linux Utility for Resource Management)</span> is an open source resource manager for different size of computer clusters on Linux. It has been widely used by more than %40 percent of world's most powerful 500 computers such as Tera-100, Tianhe-1A. For more details, please visit <a href="computing.llnl.gov/linux/slurm">SLURM</a>. 
+</p></br></br>
+<p class="description">
+	 <span class="descriptionheader">SLURM-UI</span> is a diploma project of Bogazici University Computer Engineering Department, designed to monitor and report the data of SLURM. It is a web based user interface which displays the statuses and brief information of nodes, jobs, partitions and controller deamon, in addition to showing of current and past statistics about the jobs and nodes of the cluster.  </p>
+</br><p class="description">SLURM-UI utilizes the API of SLURM via C codes and communicates with the client side by cgi technology. On the client side, HTML5 and JavaScript is used.</p>
+</p></br>
+
+</div>
+	</div>
+</div>
+
+
+</body>
+</html>
