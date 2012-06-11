@@ -1,0 +1,49 @@
+/*        V3        */
+
+*{
+	list-style:none;
+	margin:0px;
+	padding:0px;
+}
+
+	
+#menu {
+	width: 200px;
+	border-style: solid solid none solid;
+	border-color: #0e69be;
+	border-size: 1px;
+	border-width: 1px;
+
+	}
+	
+#menu li a {
+	height: 32px;
+  	voice-family: "\"}\""; 
+  	voice-family: inherit;
+  	height: 24px;
+	text-decoration: none;
+	}	
+	
+#menu li a:link, #menu li a:visited {
+	color: #0e69be;
+	display: block;
+	background: url(images/v3.jpg);
+	background-repeat:no-repeat;
+	padding: 8px 0 0 10px;
+	}
+	
+#menu li a:hover {
+	color: #0e69be;
+	background: url(images/v3.jpg) 0 -32px;
+	background-repeat:no-repeat;
+	padding: 8px 0 0 10px;
+	}
+	
+#menu li a:active {
+	color: #0e69be;
+	background: url(images/v3.jpg) 0 -64px;
+	background-repeat:no-repeat;
+	padding: 8px 0 0 10px;
+	}
+
+

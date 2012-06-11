@@ -1,0 +1,111 @@
+<!--[if IE 7]>
+    <style type="text/css">
+        .vtab > ul > li.selected{
+            border-right: 1px solid #fff !important;
+        }
+        #vtab > ul > li {
+            border-right: 1px solid #ddd !important;
+        }
+        #vtab > div { 
+            z-index: -1 !important;
+            left:1px;
+        }
+    </style>
+    <![endif]-->
+    <style type="text/css">
+        body {
+            background: #fff;
+            font-family: verdana;
+            padding-top: 50px;
+        }
+        .vtab {
+            margin: auto;
+            width: 900px;
+            height: 100%;
+        }
+        .vtab > ul > li {
+            width: 110px;
+            height: 110px;
+            background-color: #fff !important;
+            list-style-type: none;
+            display: block;
+            text-align: center;
+	    vertical-align: center;
+            margin: auto;
+            padding-bottom: 10px;
+            border: 1px solid #fff;
+            position: relative;
+            border-right: none;
+            opacity: .3;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+            background-image: url('../../jquery/jquery-ui-1.8.20.custom/css/hot-sneaks/images/ui-bg_diagonals-small_50_93c3cd_40x40.png');
+	    
+	    -moz-border-radius:60px;
+	    -webkit-border-radius:60px;
+	    border-radius:60px;	
+		
+	}
+        .vtab > ul > li.selected {
+            opacity: 1;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+            border: 1px solid #ddd;
+            border-right: none;
+            z-index: 10;
+            background-color: #fafafa !important;
+            position: relative;
+        }
+        .vtab > ul {
+            float: left;
+            width: 110px;
+            text-align: left;
+            display: block;
+            margin: auto 0;
+            padding: 0;
+            position: relative;
+            top: 30px;
+        }
+        .vtab > div {
+	    opacity: 1;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+	    background-image: url('../../jquery/jquery-ui-1.8.20.custom/css/hot-sneaks/images/ui-bg_diagonals-small_50_93c3cd_40x40.png');	
+	    background-color: #fafafa !important;	
+
+            margin-left: 110px;
+            border: 1px solid #ddd;
+            min-height: 500px;
+            padding: 12px;
+            position: relative;
+            z-index: 9;
+            
+	    -moz-border-radius:12px;
+	    -webkit-border-radius:12px;
+	    border-radius:12px;	
+        }
+        .vtab > div > h4 {
+            color: #800;
+            font-size: 1.2em;
+            border-bottom: 1px dotted #800;
+            padding-top: 5px;
+            margin-top: 0;
+        }
+        #loginForm label {
+            float: left;
+            width: 100px;
+            text-align: right;
+            clear: left;
+            margin-right: 15px;
+        }
+        #loginForm fieldset {
+            border: none;
+        }
+        #loginForm fieldset > div {
+            padding-top: 3px;
+            padding-bottom: 3px;
+        }
+        #loginForm #login {
+            margin-left: 115px;
+        }
+    </style>

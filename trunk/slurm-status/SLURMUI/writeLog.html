@@ -1,0 +1,23 @@
+<html><head>
+
+
+<script language="JavaScript" type="text/javascript" src="../jquery/jquery-ui-1.8.20.custom/js/jquery-1.7.2.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="../jquery/jquery-ui-1.8.20.custom/js/jquery-ui-1.8.20.custom.min.js"></script>
+
+
+<script type="text/javascript">
+
+
+ $(document).ready(function() {
+
+writeLog();
+
+});
+function writeLog(){
+
+ $.getJSON('../../cgi-bin/slurm/log/SLURMUI_write_log_file',function(data){});
+      
+}
+</script>
+
+</head><body>Write Log File</body></html>
